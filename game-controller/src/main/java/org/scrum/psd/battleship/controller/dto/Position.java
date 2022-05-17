@@ -1,5 +1,7 @@
 package org.scrum.psd.battleship.controller.dto;
 
+import java.util.Objects;
+
 public class Position {
     private Letter column;
     private int row;
@@ -29,6 +31,11 @@ public class Position {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(column, row);
     }
 
     @Override public boolean equals(Object o) {

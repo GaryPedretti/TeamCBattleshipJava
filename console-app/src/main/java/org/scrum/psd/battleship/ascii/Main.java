@@ -85,7 +85,7 @@ public class Main {
 
             if (isDone(enemyFleet)) {
                 console.println("Player, you win!!");
-                break;
+                return;
             }
 
             console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
@@ -112,7 +112,7 @@ public class Main {
 
             if (isDone(myFleet)) {
                 console.println("Player, you lose :(");
-                break;
+                return;
             }
 
         } while (true);
@@ -174,10 +174,10 @@ public class Main {
         fleet.get(0).getPositions().add(new Position(Letter.B, 7));
         fleet.get(0).getPositions().add(new Position(Letter.B, 8));
 
+        fleet.get(1).getPositions().add(new Position(Letter.E, 5));
         fleet.get(1).getPositions().add(new Position(Letter.E, 6));
         fleet.get(1).getPositions().add(new Position(Letter.E, 7));
         fleet.get(1).getPositions().add(new Position(Letter.E, 8));
-        fleet.get(1).getPositions().add(new Position(Letter.E, 9));
 
         fleet.get(2).getPositions().add(new Position(Letter.A, 3));
         fleet.get(2).getPositions().add(new Position(Letter.B, 3));
