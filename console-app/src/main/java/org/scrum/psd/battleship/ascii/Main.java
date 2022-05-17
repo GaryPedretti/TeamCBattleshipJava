@@ -16,6 +16,9 @@ public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
     private static ColoredPrinter console;
+    public static final String ANSI_WATER_COLOR = "\u001B[34m";
+    public static final String ANSI_HIT_COLOR = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public static void main(String[] args) {
         console = new ColoredPrinter.Builder(1, false).background(Ansi.BColor.BLACK).foreground(Ansi.FColor.WHITE).build();
@@ -44,7 +47,7 @@ public class Main {
 
     private static void StartGame() {
         Scanner scanner = new Scanner(System.in);
-
+        
         console.print("\033[2J\033[;H");
         console.println("                  __");
         console.println("                 /  \\");
@@ -63,18 +66,7 @@ public class Main {
             console.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
-            if (isHit) {
-                beep();
-
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
-            }
+            printHitOrMissText(isHit, position);
 
             console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
 
@@ -82,20 +74,44 @@ public class Main {
             isHit = GameController.checkIsHit(myFleet, position);
             console.println("");
             console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
-            if (isHit) {
-                beep();
-
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
-
-            }
+            printHitOrMissText(isHit, position);
         } while (true);
+    }
+
+    public static void printHitOrMissText(boolean isHit, Position position) {
+     if (isHit) {
+            beep();
+         
+            sendHitColorText("                \\         .  ./");
+            sendHitColorText("              \\      .:\" \";'.:..\" \"   /");
+            sendHitColorText("                  (M^^.^~~:.'\" \").");
+            sendHitColorText("            -   (/  .    . . \\ \\)  -");
+            sendHitColorText("               ((| :. ~ ^  :. .|))");
+            sendHitColorText("            -   (\\- |  \\ /  |  /)  -");
+            sendHitColorText("                 -\\  \\     /  /-");
+            sendHitColorText("                   \\  \\   /  /");
+            console.println("");
+            sendHitColorText("Yeah ! Nice hit on " + position.toString() + " !");
+        } else {
+            sendWaterColorText("                \\         .  ./");
+            sendWaterColorText("              \\      .:\" \";'.:..\" \"   /");
+            sendWaterColorText("                  (M^^.^~~:.'\" \").");
+            sendWaterColorText("            -   (/  .    . . \\ \\)  -");
+            sendWaterColorText("               ((| :. ~ ^  :. .|))");
+            sendWaterColorText("            -   (\\- |  \\ /  |  /)  -");
+            sendWaterColorText("                 -\\  \\     /  /-");
+            sendWaterColorText("                   \\  \\   /  /");
+            console.println("");
+            sendWaterColorText("Miss on " + position.toString() + " !");
+        }
+     }
+
+    private static void sendHitColorText(String hitText) {
+        console.println(ANSI_HIT_COLOR + hitText + ANSI_RESET);
+    }
+
+    private static void sendWaterColorText(String hitText) {
+        console.println(ANSI_WATER_COLOR + hitText + ANSI_RESET);
     }
 
     private static void beep() {
@@ -124,7 +140,36 @@ public class Main {
         InitializeEnemyFleet();
     }
 
+    private void autoInitializeFleetWithStaticValues() {
+        myFleet = GameController.initializeShips();
+
+        myFleet.get(0).getPositions().add(new Position(Letter.B, 4));
+        myFleet.get(0).getPositions().add(new Position(Letter.B, 5));
+        myFleet.get(0).getPositions().add(new Position(Letter.B, 6));
+        myFleet.get(0).getPositions().add(new Position(Letter.B, 7));
+        myFleet.get(0).getPositions().add(new Position(Letter.B, 8));
+
+        myFleet.get(1).getPositions().add(new Position(Letter.E, 6));
+        myFleet.get(1).getPositions().add(new Position(Letter.E, 7));
+        myFleet.get(1).getPositions().add(new Position(Letter.E, 8));
+        myFleet.get(1).getPositions().add(new Position(Letter.E, 9));
+
+        myFleet.get(2).getPositions().add(new Position(Letter.A, 3));
+        myFleet.get(2).getPositions().add(new Position(Letter.B, 3));
+        myFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+
+        myFleet.get(3).getPositions().add(new Position(Letter.F, 8));
+        myFleet.get(3).getPositions().add(new Position(Letter.G, 8));
+        myFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+
+        myFleet.get(4).getPositions().add(new Position(Letter.C, 5));
+        myFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+
+        console.println("Autoset up player fleet!");
+    }
+
     private static void InitializeMyFleet() {
+        
         Scanner scanner = new Scanner(System.in);
         myFleet = GameController.initializeShips();
 
@@ -140,6 +185,7 @@ public class Main {
                 ship.addPosition(positionInput);
             }
         }
+       
     }
 
     private static void InitializeEnemyFleet() {
