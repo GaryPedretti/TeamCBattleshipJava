@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
+import org.scrum.psd.battleship.controller.dto.ShipState;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,8 @@ public class GameControllerTest {
             counter++;
         }
 
-        boolean result = GameController.checkIsHit(ships, new Position(Letter.A, 1));
+        List<ShipState> shipstates = ShipState.from(ships);
+        boolean result = GameController.checkIsHit(shipstates, new Position(Letter.A, 1));
 
         Assert.assertTrue(result);
     }
@@ -45,14 +47,17 @@ public class GameControllerTest {
             counter++;
         }
 
-        boolean result = GameController.checkIsHit(ships, new Position(Letter.H, 1));
+        List<ShipState> shipstates = ShipState.from(ships);
+        boolean result = GameController.checkIsHit(shipstates, new Position(Letter.H, 1));
 
         Assert.assertFalse(result);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCheckIsHitPositstionIsNull() {
-        GameController.checkIsHit(GameController.initializeShips(), null);
+
+        List<ShipState> shipstates = ShipState.from(GameController.initializeShips());
+        GameController.checkIsHit(shipstates, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
