@@ -16,7 +16,7 @@ public class Main {
     private static List<Ship> myFleet;
     private static List<Ship> enemyFleet;
     private static ColoredPrinter console;
-
+    
     public static void main(String[] args) {
         console = new ColoredPrinter.Builder(1, false).background(Ansi.BColor.BLACK).foreground(Ansi.FColor.WHITE).build();
 
@@ -62,6 +62,11 @@ public class Main {
             console.println("Player, it's your turn");
             console.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
+            while (position == null){
+                console.println("This position is outside the playing field. Repeat your shot.");
+                console.println("Enter coordinates for your shot :");
+                position = parsePosition(scanner.next());
+            }
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             if (isHit) {
                 beep();
@@ -104,10 +109,12 @@ public class Main {
 
     protected static Position parsePosition(String input) {
         Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
-        int number = Integer.parseInt(input.substring(1));
+        int number = Integer.parseInt(input.substring(1, input.length() ));
+        if (number > 8) return null;
+
+
         return new Position(letter, number);
     }
-
     private static Position getRandomPosition() {
         int rows = 8;
         int lines = 8;
