@@ -17,6 +17,10 @@ public class ShipState {
         this.hits = new HashSet<>();
     }
 
+    public String getName() {
+        return ship.getName();
+    }
+
     public static List<ShipState> from(List<Ship> ships) {
         List<ShipState> out = new ArrayList<>(ships.size());
         for (Ship ship : ships) {

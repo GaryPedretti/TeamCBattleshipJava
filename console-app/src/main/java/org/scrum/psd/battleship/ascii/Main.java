@@ -92,7 +92,7 @@ public class Main {
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             printHitOrMissText(isHit, position);
 
-            if (isDone(enemyFleet)) {
+            if (isDone(true, enemyFleet)) {
                 console.println("Player, you win!!");
                 return;
             }
@@ -104,7 +104,7 @@ public class Main {
             console.println(String.format("Computer shot at %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "missed"));
             printHitOrMissText(isHit, position);
 
-            if (isDone(myFleet)) {
+            if (isDone(false, myFleet)) {
                 console.println("Player, you lose :(");
                 return;
             }
@@ -267,12 +267,23 @@ public class Main {
         enemyFleet = ShipState.from(fleet);
     }
 
-    static boolean isDone(List<ShipState> fleet) {
+    static boolean isDone(boolean isPlayer, List<ShipState> fleet) {
         Iterator<ShipState> it = fleet.iterator();
         while (it.hasNext()) {
             ShipState ship = it.next();
             if (ship.isSunk()) {
                 it.remove();
+
+                String msg;
+                if (isPlayer) {
+                    msg = "Player, you sunk the " + ship.getName();
+                } else {
+                    msg = "Player, your " + ship.getName() + " was sunk";
+                }
+
+                sendHitColorText(msg);
+                console.print("***************************************");
+                console.println("\r\n");
             }
         }
         return fleet.isEmpty();
