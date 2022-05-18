@@ -79,7 +79,13 @@ public class Main {
 
             while (position == null){
                 console.println("This position is outside the playing field. Repeat your shot.");
-                console.println("Enter coordinates for your shot :");
+                console.println("Enter coordinates for your shot OR type 'quit' to leave the game");
+
+                if("quit".equalsIgnoreCase(playerInput)){
+                    console.println("You have decided to quit. Bye!");
+                    break;
+                } 
+
                 position = parsePosition(scanner.next());
             }
 
@@ -153,7 +159,12 @@ public class Main {
     }
 
     protected static Position parsePosition(String input) {
-        Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
+        Letter letter = null;
+        try {   
+           letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
         int number = Integer.parseInt(input.substring(1, input.length() ));
         if (number > 8) return null;
 
@@ -240,6 +251,7 @@ public class Main {
         fleet.get(1).getPositions().add(new Position(Letter.E, 7));
         fleet.get(1).getPositions().add(new Position(Letter.E, 8));
 
+        /**
         fleet.get(2).getPositions().add(new Position(Letter.A, 3));
         fleet.get(2).getPositions().add(new Position(Letter.B, 3));
         fleet.get(2).getPositions().add(new Position(Letter.C, 3));
@@ -250,6 +262,7 @@ public class Main {
 
         fleet.get(4).getPositions().add(new Position(Letter.C, 5));
         fleet.get(4).getPositions().add(new Position(Letter.C, 6));
+         */
 
         enemyFleet = ShipState.from(fleet);
     }
