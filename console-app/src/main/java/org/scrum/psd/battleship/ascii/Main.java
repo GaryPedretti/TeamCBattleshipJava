@@ -73,6 +73,7 @@ public class Main {
                 console.println("Enter coordinates for your shot :");
                 position = parsePosition(scanner.next());
             }
+
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             printHitOrMissText(isHit, position);
 
@@ -87,31 +88,13 @@ public class Main {
             isHit = GameController.checkIsHit(myFleet, position);
             console.println("");
             console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
-<<<<<<< HEAD
             printHitOrMissText(isHit, position);
-=======
-            if (isHit) {
-                beep();
-
-                console.println("                \\         .  ./");
-                console.println("              \\      .:\" \";'.:..\" \"   /");
-                console.println("                  (M^^.^~~:.'\" \").");
-                console.println("            -   (/  .    . . \\ \\)  -");
-                console.println("               ((| :. ~ ^  :. .|))");
-                console.println("            -   (\\- |  \\ /  |  /)  -");
-                console.println("                 -\\  \\     /  /-");
-                console.println("                   \\  \\   /  /");
-
-            }
-
-
 
             if (isDone(myFleet)) {
                 console.println("Player, you lose :(");
                 return;
             }
 
->>>>>>> b0ee5862544d335e7f087fe1b15ef88d75aece32
         } while (true);
     }
 
@@ -224,11 +207,7 @@ public class Main {
                 ship.addPosition(positionInput);
             }
         }
-<<<<<<< HEAD
-       
-=======
         myFleet = ShipState.from(fleet);
->>>>>>> b0ee5862544d335e7f087fe1b15ef88d75aece32
     }
 
     private static void InitializeEnemyFleet() {
