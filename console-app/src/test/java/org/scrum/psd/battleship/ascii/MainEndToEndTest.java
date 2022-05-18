@@ -39,4 +39,21 @@ public class MainEndToEndTest {
             Assert.assertTrue(systemOutRule.getLog().contains("Miss"));
         }
     }
+
+    @Test
+    public void testPlayGameWin() {
+        try {
+            gameInput.provideLines(
+                    "b4", "b5", "b6", "b7", "b8",
+                    "e5", "e6", "e7", "e8",
+                    "a3", "b3", "c3",
+                    "f8", "g8", "h8",
+                    "c5", "c6");
+
+            Main.main(new String[]{});
+        } catch(NoSuchElementException e) {
+            Assert.assertTrue(systemOutRule.getLog().contains("Welcome to Battleship"));
+            Assert.assertTrue(systemOutRule.getLog().contains("Player, you win!!"));
+        }
+    }
 }
