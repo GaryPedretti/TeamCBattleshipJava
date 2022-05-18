@@ -1,0 +1,28 @@
+Battleship (also known as Broadsides or Salvo)
+
+Two players take turns in trying to guess the locations of the other player's ships on a grid.
+
+Description
+Each player draws two 8 x 8 grids, labelled along the sides with letters and numbers. 
+On the left-hand grid the player secretly draws rectangles representing their fleet of ships:
+
+The Fleet
+Each player's fleet consists of the following ships (2002 Hasbro rules): 
+§ 1 x Aircraft carrier - 5 squares
+§ 1 x Battleship - 4 squares
+§ 1 x Submarine - 3 squares
+§ 1 x Destroyers - 3 squares each
+§ 1 x Patrol Boat - 2 squares each
+
+Each ship occupies a number of adjacent squares on the grid, horizontally or vertically. 
+
+Playing
+
+During play the players take turns is making a shot at the opponent, by calling out the coordinates of a square (eg D5).The opponent responds with "hit" if it hits a ship or "miss" if it misses. 
+
+If the player has hit the last remaining square of a ship the opponent must announce the name of the ship; eg "You sank my battleship".
+
+During play each player should record their opponent's shots on the left-hand grid, and their shots on the right-hand grid as "X" for a hit and "O" for a miss:
+ 
+
+The first player to lose all their ships loses the game.

@@ -6,15 +6,17 @@ import org.scrum.psd.battleship.controller.GameController;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
+import org.scrum.psd.battleship.controller.dto.ShipState;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 
 public class Main {
-    private static List<Ship> myFleet;
-    private static List<Ship> enemyFleet;
+    private static List<ShipState> myFleet;
+    private static List<ShipState> enemyFleet;
     private static ColoredPrinter console;
     public static final String ANSI_WATER_COLOR = "\u001B[34m";
     public static final String ANSI_HIT_COLOR = "\u001B[31m";
@@ -74,13 +76,42 @@ public class Main {
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             printHitOrMissText(isHit, position);
 
+            if (isDone(enemyFleet)) {
+                console.println("Player, you win!!");
+                return;
+            }
+
             console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
 
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             console.println("");
             console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+<<<<<<< HEAD
             printHitOrMissText(isHit, position);
+=======
+            if (isHit) {
+                beep();
+
+                console.println("                \\         .  ./");
+                console.println("              \\      .:\" \";'.:..\" \"   /");
+                console.println("                  (M^^.^~~:.'\" \").");
+                console.println("            -   (/  .    . . \\ \\)  -");
+                console.println("               ((| :. ~ ^  :. .|))");
+                console.println("            -   (\\- |  \\ /  |  /)  -");
+                console.println("                 -\\  \\     /  /-");
+                console.println("                   \\  \\   /  /");
+
+            }
+
+
+
+            if (isDone(myFleet)) {
+                console.println("Player, you lose :(");
+                return;
+            }
+
+>>>>>>> b0ee5862544d335e7f087fe1b15ef88d75aece32
         } while (true);
     }
 
@@ -179,11 +210,11 @@ public class Main {
     private static void InitializeMyFleet() {
         
         Scanner scanner = new Scanner(System.in);
-        myFleet = GameController.initializeShips();
+        List<Ship> fleet = GameController.initializeShips();
 
         console.println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-        for (Ship ship : myFleet) {
+        for (Ship ship : fleet) {
             console.println("");
             console.println(String.format("Please enter the positions for the %s (size: %s)", ship.getName(), ship.getSize()));
             for (int i = 1; i <= ship.getSize(); i++) {
@@ -193,32 +224,49 @@ public class Main {
                 ship.addPosition(positionInput);
             }
         }
+<<<<<<< HEAD
        
+=======
+        myFleet = ShipState.from(fleet);
+>>>>>>> b0ee5862544d335e7f087fe1b15ef88d75aece32
     }
 
     private static void InitializeEnemyFleet() {
-        enemyFleet = GameController.initializeShips();
+        List<Ship> fleet = GameController.initializeShips();
 
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 4));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 5));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 6));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 7));
-        enemyFleet.get(0).getPositions().add(new Position(Letter.B, 8));
+        fleet.get(0).getPositions().add(new Position(Letter.B, 4));
+        fleet.get(0).getPositions().add(new Position(Letter.B, 5));
+        fleet.get(0).getPositions().add(new Position(Letter.B, 6));
+        fleet.get(0).getPositions().add(new Position(Letter.B, 7));
+        fleet.get(0).getPositions().add(new Position(Letter.B, 8));
 
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 6));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 7));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 8));
-        enemyFleet.get(1).getPositions().add(new Position(Letter.E, 9));
+        fleet.get(1).getPositions().add(new Position(Letter.E, 5));
+        fleet.get(1).getPositions().add(new Position(Letter.E, 6));
+        fleet.get(1).getPositions().add(new Position(Letter.E, 7));
+        fleet.get(1).getPositions().add(new Position(Letter.E, 8));
 
-        enemyFleet.get(2).getPositions().add(new Position(Letter.A, 3));
-        enemyFleet.get(2).getPositions().add(new Position(Letter.B, 3));
-        enemyFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+        fleet.get(2).getPositions().add(new Position(Letter.A, 3));
+        fleet.get(2).getPositions().add(new Position(Letter.B, 3));
+        fleet.get(2).getPositions().add(new Position(Letter.C, 3));
 
-        enemyFleet.get(3).getPositions().add(new Position(Letter.F, 8));
-        enemyFleet.get(3).getPositions().add(new Position(Letter.G, 8));
-        enemyFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+        fleet.get(3).getPositions().add(new Position(Letter.F, 8));
+        fleet.get(3).getPositions().add(new Position(Letter.G, 8));
+        fleet.get(3).getPositions().add(new Position(Letter.H, 8));
 
-        enemyFleet.get(4).getPositions().add(new Position(Letter.C, 5));
-        enemyFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+        fleet.get(4).getPositions().add(new Position(Letter.C, 5));
+        fleet.get(4).getPositions().add(new Position(Letter.C, 6));
+
+        enemyFleet = ShipState.from(fleet);
+    }
+
+    static boolean isDone(List<ShipState> fleet) {
+        Iterator<ShipState> it = fleet.iterator();
+        while (it.hasNext()) {
+            ShipState ship = it.next();
+            if (ship.isSunk()) {
+                it.remove();
+            }
+        }
+        return fleet.isEmpty();
     }
 }

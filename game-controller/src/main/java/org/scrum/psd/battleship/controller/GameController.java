@@ -4,6 +4,7 @@ import org.scrum.psd.battleship.controller.dto.Color;
 import org.scrum.psd.battleship.controller.dto.Letter;
 import org.scrum.psd.battleship.controller.dto.Position;
 import org.scrum.psd.battleship.controller.dto.Ship;
+import org.scrum.psd.battleship.controller.dto.ShipState;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GameController {
-    public static boolean checkIsHit(Collection<Ship> ships, Position shot) {
+    public static boolean checkIsHit(Collection<ShipState> ships, Position shot) {
         if (ships == null) {
             throw new IllegalArgumentException("ships is null");
         }
@@ -20,11 +21,9 @@ public class GameController {
             throw new IllegalArgumentException("shot is null");
         }
 
-        for (Ship ship : ships) {
-            for (Position position : ship.getPositions()) {
-                if (position.equals(shot)) {
-                    return true;
-                }
+        for (ShipState ship : ships) {
+            if (ship.checkHit(shot)) {
+                return true;
             }
         }
 
