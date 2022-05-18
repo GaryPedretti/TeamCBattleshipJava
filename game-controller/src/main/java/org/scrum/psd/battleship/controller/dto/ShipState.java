@@ -1,8 +1,5 @@
 package org.scrum.psd.battleship.controller.dto;
 
-import org.scrum.psd.battleship.controller.dto.Position;
-import org.scrum.psd.battleship.controller.dto.Ship;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
