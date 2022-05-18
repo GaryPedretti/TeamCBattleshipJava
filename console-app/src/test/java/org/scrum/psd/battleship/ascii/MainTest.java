@@ -17,6 +17,11 @@ public class MainTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    public void testInvalidPosition() {
+        Position newPosition = Main.parsePosition("A20");
+        Assertions.assertEquals(newPosition, null);
+    }
+
     @Test
     public void testParsePosition2() {
         //given
