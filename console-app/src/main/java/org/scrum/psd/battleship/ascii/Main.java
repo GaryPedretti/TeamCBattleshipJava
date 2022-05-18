@@ -62,6 +62,7 @@ public class Main {
         console.println("  |     /_\'");
         console.println("   \\    \\_/");
         console.println("    \" \"\" \"\" \"\" \"");
+        console.println("************************************************");
 
         do {
             console.println("");
@@ -82,12 +83,11 @@ public class Main {
                 return;
             }
 
-            console.println(isHit ? "Yeah ! Nice hit !" : "Miss");
-
+          
             position = getRandomPosition();
             isHit = GameController.checkIsHit(myFleet, position);
             console.println("");
-            console.println(String.format("Computer shoot in %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "miss"));
+            console.println(String.format("Computer shot at %s%s and %s", position.getColumn(), position.getRow(), isHit ? "hit your ship !" : "missed"));
             printHitOrMissText(isHit, position);
 
             if (isDone(myFleet)) {
@@ -110,8 +110,11 @@ public class Main {
             sendHitColorText("            -   (\\- |  \\ /  |  /)  -");
             sendHitColorText("                 -\\  \\     /  /-");
             sendHitColorText("                   \\  \\   /  /");
-            console.println("");
-            sendHitColorText("Yeah ! Nice hit on " + position.toString() + " !");
+            sendHitColorText("                     \\ \\ /  /");
+            
+            sendHitColorText("Hit on " + position.toString() + " !");
+            console.print("***************************************");
+            console.println("\r\n");
         } else {
             sendWaterColorText("                \\         .  ./");
             sendWaterColorText("              \\      .:\" \";'.:..\" \"   /");
@@ -121,8 +124,11 @@ public class Main {
             sendWaterColorText("            -   (\\- |  \\ /  |  /)  -");
             sendWaterColorText("                 -\\  \\     /  /-");
             sendWaterColorText("                   \\  \\   /  /");
-            console.println("");
+            sendWaterColorText("                     \\ \\ /  /");
+            
             sendWaterColorText("Miss on " + position.toString() + " !");
+            console.print("***************************************");
+            console.println("\r\n");
         }
      }
 
