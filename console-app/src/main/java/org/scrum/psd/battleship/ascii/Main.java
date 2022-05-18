@@ -67,8 +67,16 @@ public class Main {
         do {
             console.println("");
             console.println("Player, it's your turn");
-            console.println("Enter coordinates for your shot :");
-            Position position = parsePosition(scanner.next());
+            console.println("Enter coordinates for your shot OR type 'quit' to leave the game");
+
+            String playerInput = scanner.next(); 
+            
+            if("quit".equalsIgnoreCase(playerInput)){
+                console.println("You have decided to quit. Bye!");
+                break;
+            } 
+            Position position = parsePosition(playerInput);
+
             while (position == null){
                 console.println("This position is outside the playing field. Repeat your shot.");
                 console.println("Enter coordinates for your shot :");
