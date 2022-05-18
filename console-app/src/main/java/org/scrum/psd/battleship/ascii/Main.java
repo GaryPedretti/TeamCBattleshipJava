@@ -161,34 +161,34 @@ public class Main {
 
         InitializeEnemyFleet();
     }
-
-    private static void autoInitializeFleetWithStaticValues() {
-        myFleet = GameController.initializeShips();
-
-        myFleet.get(0).getPositions().add(new Position(Letter.B, 4));
-        myFleet.get(0).getPositions().add(new Position(Letter.B, 5));
-        myFleet.get(0).getPositions().add(new Position(Letter.B, 6));
-        myFleet.get(0).getPositions().add(new Position(Letter.B, 7));
-        myFleet.get(0).getPositions().add(new Position(Letter.B, 8));
-
-        myFleet.get(1).getPositions().add(new Position(Letter.E, 6));
-        myFleet.get(1).getPositions().add(new Position(Letter.E, 7));
-        myFleet.get(1).getPositions().add(new Position(Letter.E, 8));
-        myFleet.get(1).getPositions().add(new Position(Letter.E, 9));
-
-        myFleet.get(2).getPositions().add(new Position(Letter.A, 3));
-        myFleet.get(2).getPositions().add(new Position(Letter.B, 3));
-        myFleet.get(2).getPositions().add(new Position(Letter.C, 3));
-
-        myFleet.get(3).getPositions().add(new Position(Letter.F, 8));
-        myFleet.get(3).getPositions().add(new Position(Letter.G, 8));
-        myFleet.get(3).getPositions().add(new Position(Letter.H, 8));
-
-        myFleet.get(4).getPositions().add(new Position(Letter.C, 5));
-        myFleet.get(4).getPositions().add(new Position(Letter.C, 6));
-
-        console.println("Autoset up player fleet!");
-    }
+//
+//    private static void autoInitializeFleetWithStaticValues() {
+//        myFleet = GameController.initializeShips();
+//
+//        myFleet.get(0).getPositions().add(new Position(Letter.B, 4));
+//        myFleet.get(0).getPositions().add(new Position(Letter.B, 5));
+//        myFleet.get(0).getPositions().add(new Position(Letter.B, 6));
+//        myFleet.get(0).getPositions().add(new Position(Letter.B, 7));
+//        myFleet.get(0).getPositions().add(new Position(Letter.B, 8));
+//
+//        myFleet.get(1).getPositions().add(new Position(Letter.E, 6));
+//        myFleet.get(1).getPositions().add(new Position(Letter.E, 7));
+//        myFleet.get(1).getPositions().add(new Position(Letter.E, 8));
+//        myFleet.get(1).getPositions().add(new Position(Letter.E, 9));
+//
+//        myFleet.get(2).getPositions().add(new Position(Letter.A, 3));
+//        myFleet.get(2).getPositions().add(new Position(Letter.B, 3));
+//        myFleet.get(2).getPositions().add(new Position(Letter.C, 3));
+//
+//        myFleet.get(3).getPositions().add(new Position(Letter.F, 8));
+//        myFleet.get(3).getPositions().add(new Position(Letter.G, 8));
+//        myFleet.get(3).getPositions().add(new Position(Letter.H, 8));
+//
+//        myFleet.get(4).getPositions().add(new Position(Letter.C, 5));
+//        myFleet.get(4).getPositions().add(new Position(Letter.C, 6));
+//
+//        console.println("Autoset up player fleet!");
+//    }
 
     private static void InitializeMyFleet() {
         
