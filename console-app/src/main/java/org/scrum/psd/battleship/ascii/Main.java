@@ -10,7 +10,7 @@ import org.scrum.psd.battleship.controller.dto.Ship;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-//test
+
 
 public class Main {
     private static List<Ship> myFleet;
@@ -20,6 +20,7 @@ public class Main {
     public static final String ANSI_HIT_COLOR = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
 
+    
     public static void main(String[] args) {
         console = new ColoredPrinter.Builder(1, false).background(Ansi.BColor.BLACK).foreground(Ansi.FColor.WHITE).build();
 
@@ -65,6 +66,11 @@ public class Main {
             console.println("Player, it's your turn");
             console.println("Enter coordinates for your shot :");
             Position position = parsePosition(scanner.next());
+            while (position == null){
+                console.println("This position is outside the playing field. Repeat your shot.");
+                console.println("Enter coordinates for your shot :");
+                position = parsePosition(scanner.next());
+            }
             boolean isHit = GameController.checkIsHit(enemyFleet, position);
             printHitOrMissText(isHit, position);
 
@@ -120,10 +126,12 @@ public class Main {
 
     protected static Position parsePosition(String input) {
         Letter letter = Letter.valueOf(input.toUpperCase().substring(0, 1));
-        int number = Integer.parseInt(input.substring(1));
+        int number = Integer.parseInt(input.substring(1, input.length() ));
+        if (number > 8) return null;
+
+
         return new Position(letter, number);
     }
-
     private static Position getRandomPosition() {
         int rows = 8;
         int lines = 8;
@@ -140,7 +148,7 @@ public class Main {
         InitializeEnemyFleet();
     }
 
-    private void autoInitializeFleetWithStaticValues() {
+    private static void autoInitializeFleetWithStaticValues() {
         myFleet = GameController.initializeShips();
 
         myFleet.get(0).getPositions().add(new Position(Letter.B, 4));
